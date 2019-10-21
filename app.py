@@ -72,5 +72,13 @@ def member_update(id):
     return member_schema.jsonify(member)
 
 
+@app.route('/member/<id>', methods=['DELETE'])
+def delete_member(id):
+    member = Member.query.get(id)
+    db.session.delete(member)
+    db.session.commit()
+    return "Member was successfully removed"
+
+
 if __name__ == '__main__':
     app.run(debug=True)
