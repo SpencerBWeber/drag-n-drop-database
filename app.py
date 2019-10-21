@@ -53,7 +53,7 @@ def get_members():
     return jsonify(result)
 
 
-@app.route("/member/<id>", mehtods=['GET'])
+@app.route("/member/<id>", methods=['GET'])
 def get_member(id):
     member = Member.query.get(id)
     return member_schema.jsonify(member)
