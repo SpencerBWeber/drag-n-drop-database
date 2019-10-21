@@ -59,5 +59,18 @@ def get_member(id):
     return member_schema.jsonify(member)
 
 
+@app.route('/member/<id>', methods=['PUT'])
+def member_update(id):
+    member = Member.query.get(id)
+    name = request.json['name']
+    team = request.json['team']
+
+    member.name = name
+    member.team = team
+
+    db.session.commit()
+    return member_schema.jsonify(member)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
