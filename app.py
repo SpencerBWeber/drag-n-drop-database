@@ -11,5 +11,24 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
+
+class Member(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), unique=False)
+    team = db.Column(db.String(50), unique=False)
+
+    def __init__(self, name, team):
+        self.name = name
+        self.team = team
+
+
+class MemberSchema(ma.Schema):
+    class Meta:
+        fields = ('name', 'team')
+
+
+member_schema = MemberSchema()
+members_schema = MemberSchema(many=True)
+
 if __name__ == '__main__':
     app.run(debug=True)
