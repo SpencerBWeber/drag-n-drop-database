@@ -13,6 +13,7 @@ marshmallow-sqlalchemy = "*"
 flask-heroku = "*"
 gunicorn = "*"
 flask-cors = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.7"
