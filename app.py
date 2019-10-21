@@ -46,5 +46,12 @@ def add_member():
     return member_schema.jsonify(member)
 
 
+@app.route("/members", methods=["GET"])
+def get_members():
+    all_members = Member.query.all()
+    result = members_schema.dump(all_members)
+    return jsonify(result)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
