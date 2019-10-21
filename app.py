@@ -30,5 +30,21 @@ class MemberSchema(ma.Schema):
 member_schema = MemberSchema()
 members_schema = MemberSchema(many=True)
 
+
+@app.route("/member", methods=["POST"])
+def add_member():
+    name = request.json['name']
+    team = request.json['team']
+
+    new_member = Member(name, team)
+
+    db.session.add(new_member)
+    db.session.commit()
+
+    member = Member.query.get(new_member.id)
+
+    return member_schema.jsonify(member)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
